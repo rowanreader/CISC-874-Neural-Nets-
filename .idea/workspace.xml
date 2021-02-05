@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1e60b05e-22bd-41e3-80fb-6ca3c7038713" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ncjhr3EZGU2eLAW2QnoijXKjwp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.A1">
+    <configuration name="A1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CISC 874" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Jacqueline\PycharmProjects\A2\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/A1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Jacqueline\PycharmProjects\A2\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="model1_874A1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CISC 874" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Jacqueline\PycharmProjects\A2\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model1_874A1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.A1" />
+        <item itemvalue="Python.model1_874A1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e60b05e-22bd-41e3-80fb-6ca3c7038713" name="Default Changelist" comment="" />
+      <created>1611696394521</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611696394521</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="446" y="60" key="#com.intellij.ide.util.MemberChooser" timestamp="1612133712272">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="446" y="60" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1612133712272" />
+    <state x="119" y="239" width="488" height="415" key="#xdebugger.evaluate" timestamp="1612485939125">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="119" y="239" width="488" height="415" key="#xdebugger.evaluate/0.0.1280.680@0.0.1280.680" timestamp="1612485939125" />
+    <state width="430" height="466" key="DebuggerActiveHint" timestamp="1612150040299">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="430" height="466" key="DebuggerActiveHint/0.0.1280.680@0.0.1280.680" timestamp="1612150040299" />
+    <state x="423" y="81" key="FileChooserDialogImpl" timestamp="1612411597051">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="423" y="81" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1612411597051" />
+    <state width="1259" height="204" key="GridCell.Tab.-1.bottom" timestamp="1611959537579">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.-1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1611959537579" />
+    <state width="1259" height="204" key="GridCell.Tab.-1.center" timestamp="1611959537578">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.-1.center/0.0.1280.680@0.0.1280.680" timestamp="1611959537578" />
+    <state width="1259" height="204" key="GridCell.Tab.-1.left" timestamp="1611959537578">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.-1.left/0.0.1280.680@0.0.1280.680" timestamp="1611959537578" />
+    <state width="1259" height="204" key="GridCell.Tab.-1.right" timestamp="1611959537579">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.-1.right/0.0.1280.680@0.0.1280.680" timestamp="1611959537579" />
+    <state width="1259" height="117" key="GridCell.Tab.0.bottom" timestamp="1612485995728">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="117" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1612485995728" />
+    <state width="1259" height="117" key="GridCell.Tab.0.center" timestamp="1612485995728">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="117" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1612485995728" />
+    <state width="1259" height="117" key="GridCell.Tab.0.left" timestamp="1612485995728">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="117" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1612485995728" />
+    <state width="1259" height="117" key="GridCell.Tab.0.right" timestamp="1612485995728">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="117" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1612485995728" />
+    <state x="6" y="291" width="1259" height="204" key="GridCell.Tab.1.bottom" timestamp="1612485994164">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="6" y="291" width="1259" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1612485994164" />
+    <state x="6" y="291" width="1259" height="204" key="GridCell.Tab.1.center" timestamp="1612485994164">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="6" y="291" width="1259" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1612485994164" />
+    <state x="6" y="291" width="1259" height="204" key="GridCell.Tab.1.left" timestamp="1612485994164">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="6" y="291" width="1259" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1612485994164" />
+    <state x="6" y="291" width="1259" height="204" key="GridCell.Tab.1.right" timestamp="1612485994164">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="6" y="291" width="1259" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1612485994164" />
+    <state x="6" y="291" width="1230" height="176" key="GridCell.Tab.2.bottom" timestamp="1611959734550">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="6" y="291" width="1230" height="176" key="GridCell.Tab.2.bottom/0.0.1280.680@0.0.1280.680" timestamp="1611959734550" />
+    <state x="6" y="291" width="1230" height="176" key="GridCell.Tab.2.center" timestamp="1611959734550">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="6" y="291" width="1230" height="176" key="GridCell.Tab.2.center/0.0.1280.680@0.0.1280.680" timestamp="1611959734550" />
+    <state x="6" y="291" width="1230" height="176" key="GridCell.Tab.2.left" timestamp="1611959734550">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="6" y="291" width="1230" height="176" key="GridCell.Tab.2.left/0.0.1280.680@0.0.1280.680" timestamp="1611959734550" />
+    <state x="6" y="291" width="1230" height="176" key="GridCell.Tab.2.right" timestamp="1611959734550">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="6" y="291" width="1230" height="176" key="GridCell.Tab.2.right/0.0.1280.680@0.0.1280.680" timestamp="1611959734550" />
+    <state x="0" y="289" width="1230" height="176" key="GridCell.Tab.3.bottom" timestamp="1611959563988">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="289" width="1230" height="176" key="GridCell.Tab.3.bottom/0.0.1280.680@0.0.1280.680" timestamp="1611959563988" />
+    <state x="0" y="289" width="1230" height="176" key="GridCell.Tab.3.center" timestamp="1611959563988">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="289" width="1230" height="176" key="GridCell.Tab.3.center/0.0.1280.680@0.0.1280.680" timestamp="1611959563988" />
+    <state x="0" y="289" width="1230" height="176" key="GridCell.Tab.3.left" timestamp="1611959563988">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="289" width="1230" height="176" key="GridCell.Tab.3.left/0.0.1280.680@0.0.1280.680" timestamp="1611959563988" />
+    <state x="0" y="289" width="1230" height="176" key="GridCell.Tab.3.right" timestamp="1611959563988">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="289" width="1230" height="176" key="GridCell.Tab.3.right/0.0.1280.680@0.0.1280.680" timestamp="1611959563988" />
+    <state x="144" y="0" key="SettingsEditor" timestamp="1612394868920">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="144" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1612394868920" />
+    <state width="647" height="347" key="XDebugger.FullValuePopup" timestamp="1612468973002">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="647" height="347" key="XDebugger.FullValuePopup/0.0.1280.680@0.0.1280.680" timestamp="1612468973002" />
+    <state x="349" y="169" key="com.intellij.ide.util.TipDialog" timestamp="1612411680559">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="349" y="169" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1612411680559" />
+    <state x="216" y="80" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1611963791540">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="216" y="80" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1280.680@0.0.1280.680" timestamp="1611963791540" />
+    <state x="0" y="289" width="1244" height="241" key="dock-window-1" timestamp="1611959567031">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="289" width="1244" height="241" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1611959567031" />
+    <state x="-1" y="311" width="1244" height="241" key="dock-window-2" timestamp="1611959567031">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="-1" y="311" width="1244" height="241" key="dock-window-2/0.0.1280.680@0.0.1280.680" timestamp="1611959567031" />
+    <state x="187" y="461" width="1244" height="241" key="dock-window-3" timestamp="1611959567031">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="187" y="461" width="1244" height="241" key="dock-window-3/0.0.1280.680@0.0.1280.680" timestamp="1611959567031" />
+    <state x="-122" y="305" width="1244" height="241" key="dock-window-4" timestamp="1611959850117">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="-122" y="305" width="1244" height="241" key="dock-window-4/0.0.1280.680@0.0.1280.680" timestamp="1611959850117" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/model1_874A1.py</url>
+          <line>184</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/model1_874A1.py</url>
+          <line>166</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/A1.py</url>
+          <line>93</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="inputWeights" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
