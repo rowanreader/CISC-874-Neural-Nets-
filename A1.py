@@ -1,3 +1,8 @@
+# Jacqueline Heaton
+# 16jh12
+# CISC 874 Assignment 1
+# contains code for both model 1 (from scratch) and model 2 (using keras)
+
 from sklearn.datasets import load_digits, fetch_openml
 from sklearn.model_selection import train_test_split
 import random
@@ -13,39 +18,51 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import to_categorical
 import plotly.graph_objects as go
 
-# Got math from:
-# https://www.anotsorandomwalk.com/backpropagation-example-with-numbers-step-by-step/?fbclid=IwAR1lRXZCdZIxOSyQal0vtIwaSvCTzVwKfSiJ2UDMFmsn2Oocux0yjAX3shw
-
+# the sigmoid function was used as the activation function
+# takes in a single number
+# returns value of that number after it's passed through the sigmoid function
 def sigmoid(x):
     return 1/(1 + np.e**-x)
 
-def dSigmoid(x):
-    return np.e**-x/(np.e**-x + 1)**2
+# backpropagation function
+# takes in weights from input to hidden layer, weights from hidden layer to output layer, the input data,
+# the values of the hidden nodes currently, the predicted and actual outputs, the 2 biases, the learning rate,
+# a, which is used for momentum, and the weights used for momentup
 
-def backprop(inputWeights, hiddenWeights, initial, hiddenNodes, output, expected, b1, b2, rate):
+# Returns the 2 weight matrices, the 2 biases, and the 2 gradients from before the adjustment to be used next time
+# for momentum
+def backprop(inputWeights, hiddenWeights, initial, hiddenNodes, output, expected, b1, b2, rate, a, prevInput, prevHidden):
     # backpropagate from output to hidden layer
     # find difference between actual and expected output, since reused a lot
     diff = output - expected
     # 1st col is for hidden node x
+    # this is the gradient and bias between hidden and output layers
     grad2 = (diff*output*(1-output)).reshape(-1,1)* hiddenNodes
     bias2 = np.sum(diff * output*(1-output))
 
     # sum of errors
     sumError = np.dot(diff*output*(1-output), hiddenWeights)
+    # this is the gradient and bias between input and hidden layers
     grad1 = (sumError*hiddenNodes*(1-hiddenNodes)).reshape(-1,1)*initial
     bias1 = np.sum(sumError*hiddenNodes*(1-hiddenNodes))
 
+    # save the weight change for next iteration for momentum
+    newPrevInput = np.multiply(rate, grad1.T)
+    newPrevHidden = np.multiply(rate, grad2)
 
-    inputWeights = np.subtract(inputWeights, np.multiply(rate, grad1.T))
-    hiddenWeights = np.subtract(hiddenWeights, np.multiply(rate, grad2))
+    # update the weights with momentum (no momentum is just a=0)
+    inputWeights = np.subtract(inputWeights, np.multiply(rate, grad1.T)) + a*prevInput
+    hiddenWeights = np.subtract(hiddenWeights, np.multiply(rate, grad2)) + a*prevHidden
     b1 = b1 - rate * bias1
     b2 = b2 - rate * bias2
-    return inputWeights, hiddenWeights, b1, b2
+
+    # return all weights, biases, and the previous weight change
+    return inputWeights, hiddenWeights, b1, b2, newPrevInput, newPrevHidden
 
 
 # model made from scratch, prints results of test set
-# takes in train and test data, and number of nodes in hidden layer
-def model1(xTrain, yTrain, xTest, yTest, hidden):
+# takes in train and test data, number of nodes in hidden layer, number of epochs and a for momentum
+def model1(xTrain, yTrain, xTest, yTest, hidden, maxIter, a):
     # total number of images
     numImages = len(xTrain)
 
@@ -54,49 +71,72 @@ def model1(xTrain, yTrain, xTest, yTest, hidden):
     # number of output nodes
     out = 10
 
+    # initialize weights randomly
     # randomly gerenated weights from -1 to 1
     # from input to hidden layer
     inputWeights = np.random.uniform(-1, 1, size=(x,hidden))
     # from hidden to output
     hiddenWeights = np.random.uniform(-1, 1, size=(out, hidden))
+
+    # initialize momentum arrays
+    # just want the size, start with 0
+    prevInput = np.zeros((x, hidden))
+    prevHidden = np.zeros((out,hidden))
+
+    # initialize biases, learning rate, and momentum fraction
     b1 = 1
     b2 = 1
-    rate = 0.01
+    rate = 0.1
 
-    # multiply image through then apply back prop
+    # max number of iterations/epochs and counter
     iter = 0
-    maxIter = 30
+    # take in as input instead
+    # maxIter = 30
+
+    # store max accuracy value so that you can save best weights
     maxAccuracy = 0
     # iterate until loss is down or maxIter hit
-    aveError = 1 # start with error of 100%
-    # once error hits less than 0.03, tends to not improve much more on test dataset
-    while aveError > 0.03 and iter < maxIter:
+    aveError = 1 # start with error of 100%, will be overwritten soon
+    # once error hits less than 0.02, tends to not improve much more on test dataset
+    while aveError > 0.02 and iter < maxIter:
+        # index tracker for what image we're on
         count = 0
         aveError = 0
+        # store whether image was classified correctly or not as binary 0/1 (1 is correct, 0 is not)
         accuracy = [0 for _ in range(numImages)]
         for i in xTrain:
+            # forward propagation
+            # use normalized data, since get much better accuracies
             hiddenNodes = np.array(list(map(sigmoid, np.dot(preprocessing.normalize([i]).reshape(784,), inputWeights) + b1)))
             outputNodes = np.array(list(map(sigmoid, np.dot(hiddenNodes, hiddenWeights.T) + b2)))
 
             # use back prop to adjust inputWeights and hiddenWeights
             # desired output
 
+            # get desired output in one-hot-encoding form
             expected = [0 for i in range(out)]
             d = int(yTrain[count])
             expected[d] = 1
 
+            # calculate error
             aveError += np.sum(0.5 * (outputNodes - expected) ** 2)
 
-            inputWeights, hiddenWeights, b1, b2 = backprop(inputWeights, hiddenWeights, i, hiddenNodes, outputNodes, expected, b1, b2, rate)
+            # do backprop
+            inputWeights, hiddenWeights, b1, b2, prevInput, prevHidden = backprop(
+                inputWeights, hiddenWeights, i, hiddenNodes, outputNodes, expected, b1, b2, rate, a, prevInput, prevHidden)
 
             # find whether classified correctly or not, print accuracy for each for loop
             # returns array for some reason
-            if np.where(outputNodes == np.amax(outputNodes))[0] == d:
+            temp = np.where(outputNodes == np.amax(outputNodes))[0]
+            if temp == d:
                 accuracy[count] = 1
             count += 1
+        # calculate the average error for this epoch
         aveError = aveError/numImages
+        # increase epoch tracker counter
         iter += 1
         print("Accuracy:", np.average(accuracy))
+        # save weights at end of epoch if they get the best accuracy we've seen
         if np.average(accuracy) > maxAccuracy:
             bestInput = inputWeights
             bestHidden = hiddenWeights
@@ -104,11 +144,18 @@ def model1(xTrain, yTrain, xTest, yTest, hidden):
         print("Error:", aveError)
         print()
 
-    # here, go to test, use best weights
+    # apply weights to test data, use best weights
     numImages = len(xTest)
+    # for getting stats on training data instead, uncomment the next 3 lines:
+    # xTest = xTrain
+    # yTest = yTrain
+    # numImages = len(xTrain)
+
     count = 0
     num = 0
+    print("Epochs:", iter)
     output = [0 for _ in range(numImages)]
+
     for i,d in zip(xTest, yTest):
         hiddenNodes = np.array(list(map(sigmoid, np.dot(preprocessing.normalize([i]).reshape(784,), bestInput) + b1)))
         outputNodes = np.array(list(map(sigmoid, np.dot(hiddenNodes, bestHidden.T) + b2)))
@@ -124,8 +171,6 @@ def model1(xTrain, yTrain, xTest, yTest, hidden):
     # for confusion matrix
     data = {'y_Actual': list(map(int, yTest)),
             'y_Predicted': list(map(int,output))}
-    # data = {'y_Actual': list(np.ones(numImages)),
-    #         'y_Predicted': output}
 
     df = pd.DataFrame(data, columns=['y_Actual', 'y_Predicted'])
     confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'],
@@ -150,38 +195,54 @@ def model1(xTrain, yTrain, xTest, yTest, hidden):
 
     stat = go.Figure(data=go.Table(header=dict(values=['Numbers','True Positives', 'False Positives','False Negatives', 'Precision','Recall']),
                                 cells=dict(values=[[[i] for i in range(10)], tp, fp, fn, precision, recall])))
-    # stats = tabulate([[[i] for i in range(10)], tp, fp, fn, precision, recall],
-    #                  headers=['Numbers','True Positives', 'False Positives','False Negatives', 'Precision','Recall'])
-    # print(stats)
-    stat.show()
+    # this will open up a internet browser
+    # stat.show()
 
+    # makes a heatmap of the confusion matrix
     sn.heatmap(confusion_matrix.round(1), annot=True, ax=axis, linewidths=0.5)
     plt.title("Confusion Matrix for " + str(hidden) + " Hidden Nodes")
     plt.ylabel("Actual")
     plt.xlabel("Predicted")
-    plt.show()
+    # I'm assuming you don't want this printed
+    # plt.show()
 
-def model2(xTrain, yTrain, xTest, yTest, hidden):
+
+# Neural net using keras libraries
+# takes in test and train data, number of nodes in hidden layer, and number of epochs
+def model2(xTrain, yTrain, xTest, yTest, hidden, maxIter):
+    # build model, describe input, use number of hidden nodes specified
+    # output is 10 nodes
+    # both use sigmoid activation function
     model = Sequential([
         Dense(hidden, activation='sigmoid', input_shape=(784,)),
         Dense(10, activation='sigmoid',)
     ])
 
+    # compile model, use adam optimizer, categorical crossentropy, and assess using accuracy
     model.compile(
         optimizer='adam',
         loss='categorical_crossentropy',
         metrics=['accuracy'],
     )
 
+    # fit/train using the train data
+    # set epochs to 30 because we used that for model1
+    # set verbose to 0 because it prints too much stuff
     model.fit(
         xTrain,
         to_categorical(yTrain),
-        epochs=30,
+        epochs=maxIter,
         verbose=0,
     )
 
+    # this is the equivalent of accuracy, which I didn't wanna calculate. That's all this is used for.
     score = model.evaluate(xTest, to_categorical(yTest), verbose=0)
     print(score)
+
+    # get actual predictions so I can get the confusion matrix and precision and recall
+    # for training data stats, uncomment the next 2 lines:
+    # xTest = xTrain
+    # yTest = yTrain
 
     output = model.predict(
         xTest
@@ -191,7 +252,7 @@ def model2(xTrain, yTrain, xTest, yTest, hidden):
     data = {'y_Actual': list(map(int, yTest)),
             'y_Predicted': predicted}
 
-
+    # make comfusion matrix
     df = pd.DataFrame(data, columns=['y_Actual', 'y_Predicted'])
     confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'],
                                    margins=True)
@@ -217,7 +278,7 @@ def model2(xTrain, yTrain, xTest, yTest, hidden):
         header=dict(values=['Numbers', 'True Positives', 'False Positives', 'False Negatives', 'Precision', 'Recall']),
         cells=dict(values=[[[i] for i in range(10)], tp, fp, fn, precision, recall])))
 
-    #stat.show()
+    # stat.show()
 
     sn.heatmap(confusion_matrix.round(1), annot=True, ax=axis, linewidths=0.5)
     plt.title("Confusion Matrix for " + str(hidden) + " Hidden Nodes")
@@ -229,17 +290,17 @@ def model2(xTrain, yTrain, xTest, yTest, hidden):
 if __name__ == '__main__':
     x, y = fetch_openml('mnist_784', version=1, return_X_y=True)
     xTrain, xTest, yTrain, yTest = train_test_split(x, y, train_size=60000, test_size=10000, shuffle=False)
-    # xTrain = 0
-    # yTrain = 0
-    # xTest = 0
-    # yTest = 0
+
     # 20, 30, 40, 50, 60, 70, 80, 90, 100
-    for hidden in [20, 30, 40, 50, 60, 70, 80, 90, 100,110,120]:
+    # you can fill this array with whatever you want
+    for hidden in [70]:
         print("HIDDEN:", hidden)
-        model1(xTrain, yTrain, xTest, yTest, hidden)
-        # model2(list(map(preprocessing.normalize, [xTrain]))[0], yTrain, list(map(preprocessing.normalize, [xTest]))[0], yTest, hidden)
-        # model2(xTrain, yTrain, xTest,
-        #        yTest, hidden)
+        # this is the momentum multiplier, set to 0 for no momentum
+        a = 0.5
+        epoch = 30
+        model1(xTrain, yTrain, xTest, yTest, hidden, epoch, a)
+        # have to preprocess data here for model 2
+        model2(list(map(preprocessing.normalize, [xTrain]))[0], yTrain, list(map(preprocessing.normalize, [xTest]))[0], yTest, hidden, epoch)
 
 
 
