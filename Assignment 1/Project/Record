@@ -1,0 +1,49 @@
+CIFAR-100
+
+Basic CNN
+
+conv2(32, (3,3), relu)
+maxpool((2,2))
+conv2(32, (3,3), relu)
+maxpool((2,2))
+dense(256, relu)
+dense(100, soft)
+batch = 32, epoch = 100
+TRAIN ACCURACY: 96.4 
+TEST ACCURACY: 37.6
+- overtrained?
+
+increased batch to 64, decreased epoch to 50
+added early stopping and restore best weights
+TRAIN ACCURACY: 93.4
+TEST ACCURACY: 33.3
+- stopped at epoch 31
+
+increased kernel size of conv to 5x5 for both
+TRAIN ACCURACY: 89.7
+TEST ACCURACY: 30.0
+-stopped at epoch 41
+
+kernel size back to 3x3
+try batch 32 again
+TRAIN ACCURACY: 94.6
+TEST ACCURACY: 32.1
+-stopped at 48
+
+get rid of early stopping, increase epoch to 70, get rid of 1st maxpool to try to avoid generalizing
+TRAIN ACCURACY: 98.7
+TEST ACCURACY: 30.0
+
+epochs=40, dropout 0.2 after 1st conv
+TRAIN ACCURACY: 95.8
+TEST ACCURACY: 28.8
+
+no more dropout
+2nd conv layer is 64
+using elu instead
+TRAIN ACCURACY: 97.0
+TEST ACCURACY: 30.6
+
+reset to original, epoch 40, instead of relu use elu
+TRAIN ACCURACY: 
+TEST ACCURACY: 31.8
