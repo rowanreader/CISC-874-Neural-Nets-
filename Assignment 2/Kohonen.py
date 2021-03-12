@@ -3,7 +3,12 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 from scipy.stats import mode
 import random
+import plotly.graph_objects as go
+import seaborn as sn
+import pandas as pd
 
+random.seed(1)
+np.random.seed(1)
 
 # takes in a datapoint and the array of centroids (2xnumC), returns index of winning node
 def getDist(pt, centroids):
@@ -12,8 +17,8 @@ def getDist(pt, centroids):
     return dist
 
 def getEuc(pt, centroids):
-    dists = np.zeros(len(centroids))
     num = len(centroids)
+    dists = np.zeros(num)
     for i in range(num):
         dists[i] = np.linalg.norm(pt - centroids[i])
     return dists
@@ -75,6 +80,8 @@ def KH1(data, numC, a, epochs=1000):
             error += np.abs(err(temp))
 
         a = a*0.99
+
+    print("Epochs and error:")
     print(count, error)
     return centroids, wins
 
@@ -153,8 +160,6 @@ def loadFile(file):
 
 # takes in training data and how many features to reduce to
 def pca(xtrain, num):
-    # num = 1
-    # xtrain = np.array([[1.3, 3.2, 3.7], [1.4, 2.8, 4.1], [1.5, 3.1, 4.6], [1.2, 2.9, 4.8], [1.1, 3, 4.8]])
     ave = np.mean(xtrain, 0)
     xtrain = xtrain-ave
     eps = 0.1 # set epsilon for threshold
@@ -179,7 +184,6 @@ def pca(xtrain, num):
                 change += np.linalg.norm(temp)
                 # terminate when |w| reaches close to 1
         norm = np.linalg.norm(w)
-    print(norm)
     return w
 
 
@@ -232,6 +236,47 @@ def applyPCA(xtrain, w):
     newX = np.matmul(xtrain, np.transpose(w))
     return newX
 
+def test(x, y, c):
+    num = len(x)
+    predicted = np.zeros(num)
+    for i in range(num):
+        # find closest centroid
+        dist = getEuc(x[i], c)
+        predicted[i] = np.argmin(dist)
+
+    # compare predicted and actual, make matrix
+    matrix = np.zeros((3,3))
+    for i in range(num):
+        matrix[int(predicted[i]), y[i]] += 1
+
+    # stat = go.Figure(data=go.Table(
+    #     header=dict(values=['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']),
+    #     cells=dict(values=[matrix])))
+    #
+    # stat.show()
+    classes = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
+    plt.figure(figsize=(10, 10))
+    axis = plt.axes()
+    sn.heatmap(matrix.round(1), annot=True, ax=axis, linewidths=0.5, xticklabels=classes, yticklabels=classes)
+
+    plt.title("Confusion Matrix")
+    plt.xlabel("Actual")
+    plt.ylabel("Predicted")
+    plt.show()
+    return matrix
+
+def convert(ytrain):
+    classes = ['Iris-setosa\n', 'Iris-versicolor\n', 'Iris-virginica\n']
+    num = len(ytrain)
+    for i in range(num):
+        for j in range(3):
+            if ytrain[i] == classes[j]:
+                ytrain[i] = j
+                break
+    ytrain = ytrain.astype(int).reshape(-1, 1)
+    return ytrain
+
+
 if __name__ == "__main__":
     file = "iris_train.txt"
     # file = "iris_test.txt"
@@ -244,27 +289,51 @@ if __name__ == "__main__":
 
     # for each datapoint, find which cluster it belongs to and compare to which it was classified as
     num = len(wins) # this is number of datapoints
-    classes = ['Iris-setosa\n','Iris-versicolor\n','Iris-virginica\n']
+
     # replace ytrain with ints (in order of classes)
-    for i in range(num):
-        for j in range(3):
-            if ytrain[i] == classes[j]:
-                ytrain[i] = j
-                break
-    ytrain = ytrain.astype(int).reshape(-1, 1)
+    ytrain = convert(ytrain)
+
     c, matrix = assign(wins, ytrain)
+    # reorder centroid weights
+    matrix[[0,1,2]] = matrix[[c[0], c[1], c[2]]]
 
+    centroids[[0,1,2]] = centroids[[c[0], c[1], c[2]]]
+    print("Centroid weights in order of Iris-setosa, Iris-versicolor, and Iris-virginica (rows)")
     print(centroids)
-    print(c)
-    print(matrix)
-
+    acc = np.trace(matrix)/np.sum(matrix)
+    print("Accuracy:")
+    print(acc)
     graph(xtrain, centroids)
+    # given centroids, find out how test data is classified
+    xtest, ytest = loadFile("iris_test.txt")
+    ytest = convert(ytest)
+    test(xtest, ytest, centroids)
 
     w = pca(xtrain, 3)
+    print("PCA matrix:")
     print(w)
 
     newX = applyPCA(xtrain, w)
+    newX2 = applyPCA(xtest, w)
+
+    np.savetxt("train1.txt", newX)
+
+    np.savetxt("test1.txt", newX2)
 
     centroids, wins = KH2(newX, 3, 0.5)
+
+    c, matrix = assign(wins, ytrain)
+
+    matrix[[0,1,2]] = matrix[[c[0], c[1], c[2]]]
+
+    centroids[[0,1,2]] = centroids[[c[0], c[1], c[2]]]
+    print("Centroid weights in order of Iris-setosa, Iris-versicolor, and Iris-virginica (rows)")
     print(centroids)
+
+    acc = np.trace(matrix) / np.sum(matrix)
+    print("Accuracy:")
+    print(acc)
+    # uses ytrain as colour
     graph2(newX, ytrain, centroids)
+
+    test(newX2, ytest, centroids)
