@@ -4,7 +4,9 @@ import random
 import seaborn as sn
 import sklearn.preprocessing as sk
 
-
+# if 1, show all graphs
+# if 0, do not show graphs
+graphing = 0
 # takes in a datapoint and the array of centroids (2xnumC), returns index of winning node
 # does i.w
 def getDist(pt, centroids):
@@ -205,12 +207,22 @@ def applyPCA(xtrain, w):
 # returns confusion matrix
 def test(x, y, c):
     num = len(x)
+    numC = len(c)
+    eps = -1/numC
     predicted = np.zeros(num)
+    error = 0
     for i in range(num):
         # find closest centroid
-        dist = getEuc(x[i], c)
-        predicted[i] = np.argmin(dist)
-
+        error += np.min(getEuc(x[i], c))
+        # predicted[i] = np.argmin(dist)
+        dist = getDist(x[i], c)
+        outputs = np.copy(dist)
+        while np.sum(outputs) != np.max(outputs):
+            for j in range(numC):
+                outputs[j] = np.max([0, outputs[j] + eps * (sum(outputs) - outputs[j])])
+        predicted[i] = np.argmax(outputs)
+    print("Total testing error:")
+    print(error)
     # compare predicted and actual, make matrix
     matrix = np.zeros((3,3))
     for i in range(num):
@@ -224,7 +236,10 @@ def test(x, y, c):
     plt.title("Confusion Matrix")
     plt.xlabel("Actual")
     plt.ylabel("Predicted")
-    plt.show()
+    if graphing == 1:
+        plt.show()
+    print("Confusion matrix for test set")
+    print(matrix)
     return matrix
 
 # replaces y data with numbers
@@ -247,7 +262,7 @@ if __name__ == "__main__":
     # get data
     xtrain, ytrain = loadFile(file)
     xtrain = sk.scale(xtrain)
-    a = 0.8 # learning rate
+    a = 0.9 # learning rate
     # find centroids
     # send in training data, number of centroids, learning rate (can also send in number of epochs)
     centroids, wins = KH1(xtrain, 3, a)
@@ -267,7 +282,8 @@ if __name__ == "__main__":
     acc = np.trace(matrix)/np.sum(matrix)
     print("Train Accuracy:")
     print(acc)
-    graph(xtrain, centroids)
+    if graphing == 1:
+        graph(xtrain, centroids)
 
     # given centroids, find out how test data is classified
     xtest, ytest = loadFile("iris_test.txt")
@@ -300,6 +316,7 @@ if __name__ == "__main__":
     print("Train Accuracy:")
     print(acc)
     # uses ytrain as colour
-    graph2(newX, ytrain, centroids)
+    if graphing == 1:
+        graph2(newX, ytrain, centroids)
 
     test(newX2, ytest, centroids)
